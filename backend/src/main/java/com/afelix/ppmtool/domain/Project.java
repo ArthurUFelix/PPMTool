@@ -1,6 +1,10 @@
 package com.afelix.ppmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -9,13 +13,21 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Nome do projeto é obrigatório")
     private String projectName;
+    @NotBlank(message = "Identificador do projeto é obrigatório")
+    @Size(min = 4, max = 5, message = "Por favor use 4 ou 5 caracteres")
+    @Column(updatable = false, unique = true)
     private String projectIdentifier;
+    @NotBlank(message = "Descrição do projeto é obrigatória")
     private String description;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date start_date;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date end_date;
-
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date created_At;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
 
     public Project() {
