@@ -28,6 +28,10 @@ public class ProjectService {
         if(project == null)
             throw new ProjectIdException("Nenhum projeto com identificador '" + projectId + "' encontrado");
 
-        return projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+        return project;
+    }
+
+    public Iterable<Project> findAllProjects() {
+        return projectRepository.findAll();
     }
 }
